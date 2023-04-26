@@ -1,9 +1,9 @@
 #pragma once
 #include "include.h"
 
-class Square{
-    private:
-    protected:
-    public:
-
+class Square
+{
+private:
+protected:
+public:
 };
