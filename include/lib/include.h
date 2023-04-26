@@ -14,7 +14,7 @@
 #include <ostream>
 #include <fstream>
 #include <iomanip>
-
+#include "Function.h"
 // using std
 using namespace std;
 
