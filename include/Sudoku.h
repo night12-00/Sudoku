@@ -2,8 +2,9 @@
 #include "include.h"
 #include "Square.h"
 
-class Sudoku : Square{
-    private:
-    protected:
-    public:
+class Sudoku : Square
+{
+private:
+protected:
+public:
 };

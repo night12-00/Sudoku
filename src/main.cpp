@@ -1,12 +1,19 @@
 #include "include.h"
 
+void In(int n)
+{
+  while (n > 0)
+  {
+    cout << n << endl;
+    n--;
+  }
+}
+
 int main()
 {
-  while (true)
-  {
-    int key = getch();
-    cout << key << endl;
-  }
+  int n = 100;
+  In(n);
+
   cout << "Init Project";
   return 0;
 }
