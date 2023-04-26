@@ -1,12 +1,15 @@
 #include "include.h"
 
+void List_100(int n)
+{
+  for (int i = 0; i <= n; i++)
+  {
+    cout << i;
+  }
+}
+
 int main()
 {
-  while (true)
-  {
-    int key = getch();
-    cout << key << endl;
-  }
-  cout << "Init Project";
+  List_100(100);
   return 0;
 }
