@@ -23,5 +23,25 @@ void clearSystem()
 // white        37         47
 string printColor(string text, int color)
 {
-    return "\033[1;" + to_string(color) + "m" + text + "\033[0m\n";
+    return "\033[1;" + to_string(color) + "m" + text + "\033[0m";
+}
+
+// Create longlong number
+long long Rand(long long l, long long h)
+{
+    return l + ((long long)rand() * (RAND_MAX + 1) * (RAND_MAX + 1) * (RAND_MAX + 1) +
+                (long long)rand() * (RAND_MAX + 1) * (RAND_MAX + 1) +
+                (long long)rand() * (RAND_MAX + 1) +
+                rand()) %
+                   (h - l + 1);
+}
+
+// Random range [1 , num]
+int RandomNumber(int num)
+{
+    long long maxRand = 10000000000000;
+    // cout<< (int)floor((double)Rand(0,maxRand) / (double)maxRand * num + 1) <<" ";
+
+    // return (int)floor((float)(rand() / double(RAND_MAX) * num + 1));
+    return (int)floor((double)Rand(0, maxRand) / (double)maxRand * num + 1);
 }
