@@ -15,13 +15,13 @@ void Sudoku::menu()
     while (true)
     {
         clearSystem();
-        cout << printColor("=========================================", 37);
-        cout << setw(35) << right << printColor("Sudoku", 36);
-        cout << printColor("=========================================", 37);
+        cout << printColor("=========================================", 37) << endl;
+        cout << setw(35) << right << printColor("Sudoku", 36) << endl;
+        cout << printColor("=========================================", 37) << endl;
         cout << endl;
-        cout << printColor("[1] START GAME", 32);
-        cout << printColor("[2] INSTRUCTIONS", 33);
-        cout << printColor("[3] EXIT", 31);
+        cout << printColor("[1] START GAME", 32) << endl;
+        cout << printColor("[2] INSTRUCTIONS", 33) << endl;
+        cout << printColor("[3] EXIT", 31) << endl;
         cout << endl;
         char select = getch();
         if (!(select < '1' || select > '3'))
@@ -63,29 +63,30 @@ void Sudoku::playSudoku()
     else
     {
         // GAME START
-        level = (int)setLevel - 48; // Initialize Level\
+        level = (int)setLevel - 48; // Initialize Level
 
         // Random level
-        int randNomal = rand() % 4 + 35;
-        int randMedium = rand() % 4 + 40;
-        int randHard = rand() % 4 + 45;
+
         if (level == 1)
         {
-            this->K = randNomal;
+            this->K = 35;
         }
         else if (level == 2)
         {
-            this->K = randMedium;
+            this->K = 40;
         }
         else if (level == 3)
         {
-            this->K = randHard;
+            this->K = 45;
         }
 
         status = "playing"; // SET STATUS
         pointerX = 0;       // RESET POINTER
         pointerY = 0;       // RESET POINTER
-        mainGame();
+
+        createGrid();
+
+        mainGame(0);
     }
 
     // PAUSE
@@ -98,33 +99,33 @@ void Sudoku::playSudoku()
 void Sudoku::helpSudoku(string located)
 {
     clearSystem();
-    cout << printColor("=========================================", 37);
-    cout << setw(35) << right << printColor("Sudoku", 36);
-    cout << printColor("=========================================", 37);
+    cout << printColor("=========================================", 37) << endl;
+    cout << setw(35) << right << printColor("Sudoku", 36) << endl;
+    cout << printColor("=========================================", 37) << endl;
     cout << endl;
-    cout << setw(38) << right << printColor("INSTRUCTIONS", 33);
+    cout << setw(38) << right << printColor("INSTRUCTIONS", 33) << endl;
 
-    cout << printColor("  * The sudoku puzzle is consist of", 34);
-    cout << printColor("  a 9x9 grid, you have to fill", 34);
-    cout << printColor("  the empty squares using the", 34);
-    cout << printColor("  numbers 1 to 9.", 34);
-    cout << printColor("  * Use the 1-9 keys in your", 34);
-    cout << printColor("  keybord to fill the sudoku", 34);
-    cout << printColor("  puzzle.", 34);
-    cout << printColor("  * To move arround the sudoku", 34);
-    cout << printColor("  puzzle, use the WASD letter", 34);
-    cout << printColor("  keys or the arrow keys. ", 34);
-    cout << printColor("  * Use backspace or delete key to", 34);
-    cout << printColor("  clear the number selected in", 34);
-    cout << printColor("  the sudoku puzzle.", 34);
-    cout << printColor("  * Once you finish the sudoku", 34);
-    cout << printColor("  puzzle, it will prompt you that", 34);
-    cout << printColor("  you finished it if not you can", 34);
-    cout << printColor("  press P then you can choose", 34);
-    cout << printColor("  \"Quit\" in the pause menu", 34);
-    cout << printColor("  if your having a hard time.", 34);
+    cout << printColor("  * The sudoku puzzle is consist of", 34) << endl;
+    cout << printColor("  a 9x9 grid, you have to fill", 34) << endl;
+    cout << printColor("  the empty squares using the", 34) << endl;
+    cout << printColor("  numbers 1 to 9.", 34) << endl;
+    cout << printColor("  * Use the 1-9 keys in your", 34) << endl;
+    cout << printColor("  keybord to fill the sudoku", 34) << endl;
+    cout << printColor("  puzzle.", 34) << endl;
+    cout << printColor("  * To move arround the sudoku", 34) << endl;
+    cout << printColor("  puzzle, use the WASD letter", 34) << endl;
+    cout << printColor("  keys or the arrow keys. ", 34) << endl;
+    cout << printColor("  * Use backspace or delete key to", 34) << endl;
+    cout << printColor("  clear the number selected in", 34) << endl;
+    cout << printColor("  the sudoku puzzle.", 34) << endl;
+    cout << printColor("  * Once you finish the sudoku", 34) << endl;
+    cout << printColor("  puzzle, it will prompt you that", 34) << endl;
+    cout << printColor("  you finished it if not you can", 34) << endl;
+    cout << printColor("  press P then you can choose", 34) << endl;
+    cout << printColor("  \"Quit\" in the pause menu", 34) << endl;
+    cout << printColor("  if your having a hard time.", 34) << endl;
     cout << endl;
-    cout << printColor("(Press any key to go back!) ", 35);
+    cout << printColor("(Press any key to go back!) ", 35) << endl;
 
     // PAUSE
     getch();
@@ -138,11 +139,11 @@ void Sudoku::helpSudoku(string located)
 void Sudoku::exitMenu()
 {
     clearSystem();
-    cout << printColor("=========================================", 37);
-    cout << setw(10) << right << "" << printColor("DO YOU WANT TO EXIT?", 31);
-    cout << printColor("[1] YES", 32);
-    cout << printColor("[2] NO", 33);
-    cout << printColor("=========================================", 37);
+    cout << printColor("=========================================", 37) << endl;
+    cout << setw(10) << right << "" << printColor("DO YOU WANT TO EXIT?", 31) << endl;
+    cout << printColor("[1] YES", 32) << endl;
+    cout << printColor("[2] NO", 33) << endl;
+    cout << printColor("=========================================", 37) << endl;
 
     while (true)
     {
@@ -171,17 +172,17 @@ char Sudoku::gameLevel()
     do
     {
         clearSystem();
-        cout << printColor("=========================================", 37);
-        cout << setw(35) << right << printColor("Sudoku", 36);
-        cout << printColor("=========================================", 37);
+        cout << printColor("=========================================", 37) << endl;
+        cout << setw(35) << right << printColor("Sudoku", 36) << endl;
+        cout << printColor("=========================================", 37) << endl;
 
-        cout << setw(10) << right << "" << printColor("SELECT A DIFFICULTY", 34);
-        cout << printColor("[1] EASY", 32);
-        cout << printColor("[2] MEDIUM", 33);
-        cout << printColor("[3] HARD", 35);
-        cout << printColor("[4] BACK", 37); // BACK TO MENU
+        cout << setw(10) << right << "" << printColor("SELECT A DIFFICULTY", 34) << endl;
+        cout << printColor("[1] EASY", 32) << endl;
+        cout << printColor("[2] MEDIUM", 33) << endl;
+        cout << printColor("[3] HARD", 35) << endl;
+        cout << printColor("[4] BACK", 37) << endl; // BACK TO MENU
         cout << endl;
-        cout << printColor(" Press the number of your choice! ", 37);
+        cout << printColor(" Press the number of your choice! ", 37) << endl;
 
         // GET USER CHOICE
         char select = getch();
@@ -196,6 +197,7 @@ char Sudoku::gameLevel()
 }
 void Sudoku::createGrid()
 {
+    int sqrtN = sqrt(N);
     grid = new Square *[N];
     // Create a row for every pointer
     for (int i = 0; i < N; i++)
@@ -207,44 +209,353 @@ void Sudoku::createGrid()
         // Initialize all entries as false to indicate
         // that there are no edges initially
     }
+
+    fillDiagonal();
+    fillRemaining(0, sqrtN);
+
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            solutionGrid[i][j] = grid[i][j].getValue();
+        }
+    }
+
+    removeKDigits();
 }
+
+// Check value
+bool Sudoku::unUsedInBox(int rowStart, int colStart, int num)
+{
+    int sqrtN = sqrt(N);
+    for (int i = 0; i < sqrtN; i++)
+    {
+        for (int j = 0; j < sqrtN; j++)
+        {
+            int value = grid[rowStart + i][colStart + j].getValue();
+            if (value == num)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+bool Sudoku::unUsedInRow(int row, int num)
+{
+    for (int j = 0; j < N; j++)
+    {
+        int value = grid[row][j].getValue();
+
+        if (value == num)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+// check in the row for existence
+bool Sudoku::unUsedInCol(int col, int num)
+{
+    for (int i = 0; i < N; i++)
+    {
+        int value = grid[i][col].getValue();
+        if (value == num)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+bool Sudoku::CheckIfSafe(int row, int col, int num)
+{
+    int sqrtN = sqrt(N);
+    return (
+        unUsedInRow(row, num) && unUsedInCol(col, num) && unUsedInBox(row - row % sqrtN, col - col % sqrtN, num));
+}
+
 // Fill the diagonal of SRN x SRN matrices
 void Sudoku::fillDiagonal()
 {
-}
-// Fill remaining blocks
-void Sudoku::fillRemaining()
-{
-}
-// Remove Randomly K digits to make game
-void Sudoku::removeKDigits()
-{
-}
+    int sqrtN = sqrt(N);
 
-void Sudoku::mainGame()
-{
-    // get time for random
-    srand(time(0));
-
-    char key;
-    clearSystem();
-    bool check = true;
-    cout << printColor("=========================================", 37);
-    cout << setw(35) << right << printColor("Sudoku", 36);
-    cout << printColor("=========================================", 37);
-
-    key = getch();
-    if (key == 'p')
+    for (int i = 0; i < N; i = i + sqrtN)
     {
-        check = false;
-        exit(0);
+
+        // for diagonal box, start coordinates->i==j
+        fillBox(i, i);
+    }
+}
+void Sudoku::fillBox(int row, int col)
+{
+    int sqrtN = sqrt(N);
+    int num;
+    for (int i = 0; i < sqrtN; i++)
+    {
+        for (int j = 0; j < sqrtN; j++)
+        {
+            do
+            {
+                num = RandomNumber(N);
+            } while (!unUsedInBox(row, col, num));
+            grid[row + i][col + j].setvalue(num);
+        }
+    }
+}
+
+// Fill remaining blocks
+bool Sudoku::fillRemaining(int row, int col)
+{
+    int SRN = (int)sqrt(N);
+    // System.out.println(row+" "+col);
+    if (col >= N && row < N - 1)
+    {
+        row = row + 1;
+        col = 0;
+    }
+    if (row >= N && col >= N)
+    {
+        return true;
+    }
+    if (row < SRN)
+    {
+        if (col < SRN)
+        {
+            col = SRN;
+        }
+    }
+    else if (row < N - SRN)
+    {
+        if (col == (int)(row / SRN) * SRN)
+        {
+            col = col + SRN;
+        }
     }
     else
     {
-        mainGame();
+        if (col == N - SRN)
+        {
+            row = row + 1;
+            col = 0;
+            if (row >= N)
+            {
+                return true;
+            }
+        }
+    }
+    for (int num = 1; num <= N; num++)
+    {
+        if (CheckIfSafe(row, col, num))
+        {
+            grid[row][col].setvalue(num);
+            if (fillRemaining(row, col + 1))
+            {
+                return true;
+            }
+            grid[row][col].setvalue(0);
+        }
+    }
+    return false;
+}
+
+// Remove Randomly K digits to make game
+void Sudoku::removeKDigits()
+{
+    int count = K;
+    while (count != 0)
+    {
+        int cellId = RandomNumber(N * N) - 1;
+        // System.out.println(cellId);
+        // extract coordinates i and j
+        int i = (cellId / N);
+        int j = cellId % 9 + 1;
+        if (j != 0)
+        {
+            j = j - 1;
+        }
+        // System.out.println(i+" "+j);
+        int value = grid[i][j].getValue();
+        if (value != 0)
+        {
+            count--;
+            grid[i][j].setvalue(0);
+        }
     }
 }
 
-void Sudoku::printGrid()
+void Sudoku::mainGame(int value)
 {
+
+    clearSystem();
+    cout << printColor("=========================================", 37) << endl;
+    cout << setw(35) << right << printColor("Sudoku", 36) << endl;
+    cout << printColor("=========================================", 37) << endl;
+
+    printSudoku(value, CheckIfSafe(pointerX, pointerY, value));
+
+    while (true)
+    {
+        int key = getch();
+        if (key == 'p')
+        {
+            exit(0);
+        }
+        else
+        {
+            // Get 1 - > 233
+            if (!(key <= 0 || key >= 224))
+            {
+                if (key == 75)
+                {
+
+                    upKey();
+                    mainGame(0);
+                }
+                else if (key == 72)
+                {
+                    leftKey();
+                    mainGame(0);
+                }
+                else if (key == 80)
+                {
+                    rightKey();
+                    mainGame(0);
+                }
+                else if (key == 77)
+                {
+
+                    downKey();
+                    mainGame(0);
+                }
+                else
+                {
+                    mainGame(key - 48);
+                }
+            }
+            cout << key << endl;
+        }
+    }
+}
+
+void Sudoku::printSudoku(int num, bool isResult)
+{
+    int colorBorder = 33;
+    int colorValueDefault = 37;
+    int colorFalse = 31;
+    int colorTrue = 32;
+    int colorFocus = 34;
+
+    cout << endl;
+    cout << endl;
+    cout << printColor("=========================================", colorBorder) << endl;
+
+    for (int i = 0; i < N; i++)
+    {
+        int h = i + 1;
+        for (int j = 0; j < N; j++)
+        {
+            int k = j + 1;
+            string value = to_string(grid[i][j].getValue());
+            if (grid[i][j].getValue() == 0)
+            {
+                value = " ";
+            }
+
+            if (pointerX == i && pointerY == j && grid[pointerX][pointerY].getValue() != 0)
+            {
+                value = printColor(to_string(grid[pointerX][pointerY].getValue()), colorFocus);
+            }
+            if (pointerX == i && pointerY == j && grid[pointerX][pointerY].getValue() == 0)
+            {
+                value = printColor("x", colorFocus);
+            }
+            if (num != 0 && pointerX == i && pointerY == j && grid[pointerX][pointerY].getValue() == 0)
+            {
+                value = printColor(to_string(num), isResult ? colorTrue : colorFalse);
+            }
+
+            if (j == 0)
+            {
+
+                cout << printColor("|| ", colorBorder) << value << printColor(" |", colorBorder);
+                continue;
+            }
+            else if (j == 8)
+            {
+                cout
+                    << " " << value << printColor(" ||", colorBorder);
+            }
+            else if (j == 2 || j == 5)
+            {
+                cout << " " << value << printColor(" ||", colorBorder);
+            }
+            else
+            {
+                cout << " " << value << printColor(" |", colorBorder);
+            }
+        }
+        if (h % 3 == 0)
+        {
+            cout << endl;
+            cout << printColor("=========================================", colorBorder) << endl;
+        }
+        else
+        {
+            cout << endl;
+        }
+    }
+    cout << endl;
+    // for (int i = 0; i < N; i++)
+    // {
+    //     for (int j = 0; j < N; j++)
+    //     {
+    //         cout << solutionGrid[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+}
+
+void Sudoku::upKey()
+{
+    if (pointerY == 0)
+    {
+        pointerY == 8;
+    }
+    else
+    {
+        pointerY--;
+    }
+}
+void Sudoku::downKey()
+{
+    if (pointerY == 8)
+    {
+        pointerY == 0;
+    }
+    else
+    {
+        pointerY++;
+    }
+}
+void Sudoku::leftKey()
+{
+    if (pointerX == 0)
+    {
+        pointerX == 8;
+    }
+    else
+    {
+        pointerX--;
+    }
+}
+void Sudoku::rightKey()
+{
+    if (pointerX == 8)
+    {
+        pointerX == 0;
+    }
+    else
+    {
+        pointerX++;
+    }
 }

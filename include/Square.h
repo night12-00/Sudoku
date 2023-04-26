@@ -1,16 +1,18 @@
 #pragma once
 #include "include.h"
+#include "Function.h"
 
 class Square
 {
 private:
-    int row;
-    int column;
     int value = 0;
 
 protected:
 public:
-    Square(int value, int row, int column);
+    Square(char value);
     Square();
     ~Square();
+    int getValue();
+    string getValue(int color);
+    void setvalue(int value);
 };
