@@ -11,7 +11,7 @@ void In(int n)
 
 int main()
 {
-  int n = 99;
+  int n = 100;
   In(n);
 
   cout << "Init Project";
