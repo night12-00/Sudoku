@@ -1,10 +1,12 @@
 #include "include.h"
 
-int main() {
-  while(true){
+int main()
+{
+  while (true)
+  {
     int key = getch();
-    cout<<key<<endl;
+    cout << key << endl;
   }
-  cout<<"Init Project";
+  cout << "Init Project";
   return 0;
 }
