@@ -1,19 +1,8 @@
 #include "include.h"
-
-void In(int n)
-{
-  while (n > 0)
-  {
-    cout << n << endl;
-    n--;
-  }
-}
+#include "Sudoku.h"
 
 int main()
 {
-  int n = 100;
-  In(n);
-
-  cout << "Init Project";
+  Sudoku *init = new Sudoku(9);
   return 0;
 }
