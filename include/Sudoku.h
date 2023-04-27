@@ -11,7 +11,6 @@ private:
     int level = 1;          // Default level Game
     int pointerX = 0;       // Default pointer X = 0;
     int pointerY = 0;       // Default pointer Y = 0;
-    string status;          // Checking status: playing, pause
     int solutionGrid[9][9]; // grid Solution
     int highLights[9][9];   // arr for highligh
 

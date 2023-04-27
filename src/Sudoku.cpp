@@ -80,9 +80,8 @@ void Sudoku::playSudoku()
             this->K = 45;
         }
 
-        status = "playing"; // SET STATUS
-        pointerX = 0;       // RESET POINTER
-        pointerY = 0;       // RESET POINTER
+        pointerX = 0; // RESET POINTER
+        pointerY = 0; // RESET POINTER
 
         createGrid();
 
@@ -516,13 +515,13 @@ void Sudoku::printSudoku(int num, bool isResult)
                 if (pointerX == i && pointerY == j && grid[pointerX][pointerY].getValue() != 0)
                 {
                     value = to_string(grid[pointerX][pointerY].getValue());
-                    highLights[i][j] = colorFocus;
+                    if (highLights[i][j] != 32 && highLights[i][j] != 31)
+                    {
+                        highLights[i][j] = colorFocus;
+                    }
                     // Mat mau xac dinh dung hay sai
                 }
-                else if (highLights[i][j] == 32 || highLights[i][j] == 31)
-                {
-                }
-                else if (highLights[i][j] != 32 && highLights[i][j] != 31 && highLights[i][j] == colorFocus)
+                else if (highLights[i][j] != 32 && highLights[i][j] != 31)
                 {
                     highLights[i][j] = colorValueDefault;
                 }
