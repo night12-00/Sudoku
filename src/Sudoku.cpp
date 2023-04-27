@@ -445,22 +445,22 @@ void Sudoku::mainGame(int value)
                         mainGame(0);
                     }
                 }
-                else if (key == 75)
+                else if (key == 75 || key == 68)
                 {
                     leftKey();
                     mainGame(0);
                 }
-                else if (key == 72)
+                else if (key == 72 || key == 65)
                 {
                     upKey();
                     mainGame(0);
                 }
-                else if (key == 80)
+                else if (key == 80 || key == 66)
                 {
                     downKey();
                     mainGame(0);
                 }
-                else if (key == 77)
+                else if (key == 77 || key == 67)
                 {
                     rightKey();
                     mainGame(0);
