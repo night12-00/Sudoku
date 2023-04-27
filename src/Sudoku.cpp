@@ -16,7 +16,7 @@ void Sudoku::menu()
     {
         clearSystem();
         cout << printColor("=========================================", 37) << endl;
-        cout << setw(35) << right << printColor("Sudoku", 36) << endl;
+        cout << setw(35) << right << printColor("SUDOKU", 36) << endl;
         cout << printColor("=========================================", 37) << endl;
         cout << endl;
         cout << printColor("[1] START GAME", 32) << endl;
@@ -53,7 +53,7 @@ void Sudoku::playSudoku()
 {
     // GAME LEVEL
     char setLevel = gameLevel();
-
+    incorect = 5;
     // CONDITION LEVEL
     if (setLevel == '4')
     {
@@ -99,7 +99,7 @@ void Sudoku::helpSudoku(string located)
 {
     clearSystem();
     cout << printColor("=========================================", 37) << endl;
-    cout << setw(35) << right << printColor("Sudoku", 36) << endl;
+    cout << setw(35) << right << printColor("SUDOKU", 36) << endl;
     cout << printColor("=========================================", 37) << endl;
     cout << endl;
     cout << setw(38) << right << printColor("INSTRUCTIONS", 33) << endl;
@@ -172,14 +172,14 @@ char Sudoku::gameLevel()
     {
         clearSystem();
         cout << printColor("=========================================", 37) << endl;
-        cout << setw(35) << right << printColor("Sudoku", 36) << endl;
+        cout << setw(35) << right << printColor("SUDOKU", 36) << endl;
         cout << printColor("=========================================", 37) << endl;
 
         cout << setw(10) << right << "" << printColor("SELECT A DIFFICULTY", 34) << endl;
         cout << printColor("[1] EASY", 32) << endl;
         cout << printColor("[2] MEDIUM", 33) << endl;
-        cout << printColor("[3] HARD", 35) << endl;
-        cout << printColor("[4] BACK", 37) << endl; // BACK TO MENU
+        cout << printColor("[3] HARD", 31) << endl;
+        cout << printColor("[4] BACK", 35) << endl; // BACK TO MENU
         cout << endl;
         cout << printColor(" Press the number of your choice! ", 37) << endl;
 
@@ -188,6 +188,11 @@ char Sudoku::gameLevel()
         if (!(select < '1' || select > '4'))
         {
             choice = select;
+            break;
+        }
+        else if ((int)select == 27)
+        {
+            choice = '4';
             break;
         }
     } while (true);
@@ -398,17 +403,32 @@ void Sudoku::removeKDigits()
     }
 }
 
+bool Sudoku::getCorect()
+{
+    corect = 0;
+    // Kiểm tra tất cả các ô có giá trị khác 0 (tức là đã được điền đầy đủ)
+    for (int row = 0; row < 9; row++)
+    {
+        for (int col = 0; col < 9; col++)
+        {
+            if (grid[row][col].getValue() == solutionGrid[row][col])
+            {
+                ++corect;
+            }
+        }
+    }
+
+    return true;
+}
+
 void Sudoku::mainGame(int value)
 {
 
     clearSystem();
     cout << printColor("=========================================", 37) << endl;
-    cout << setw(35) << right << printColor("Sudoku", 36) << endl;
+    cout << setw(35) << right << printColor("SUDOKU", 36) << endl;
     cout << printColor("=========================================", 37) << endl;
-
-    cout << grid[pointerX][pointerY].getValue() << " " << solutionGrid[pointerX][pointerY] << endl;
-
-    printSudoku(value, value == solutionGrid[pointerX][pointerY]);
+    cout << endl;
 
     if (value > 0 && value < 10)
     {
@@ -421,53 +441,73 @@ void Sudoku::mainGame(int value)
     }
     if (value != 0 && value != solutionGrid[pointerX][pointerY])
     {
+        --incorect;
+        if (incorect > 0)
+        {
+            cout << setw(4) << "" << printColor("CAREFULL!!! You have " + to_string(incorect) + " mistakes left", 31);
+        }
         highLights[pointerX][pointerY] = 31;
     }
+
+    getCorect();
+    if (incorect <= 0)
+    {
+        cout << setw(15) << "" << printColor("YOU LOSE !!!", 31);
+    }
+    if (corect == N * N)
+    {
+        cout << setw(15) << "" << printColor("YOU WIN !!!", 32);
+    }
+    printSudoku(value, value == solutionGrid[pointerX][pointerY]);
 
     while (true)
     {
         int key = getch();
-        if (key == 112)
+        if (key == 112 || key == 27)
         {
             pauseKey();
         }
         else
         {
-            // Get 1 - > 233
-
-            if (!(key <= 0 || key >= 224))
+            if (incorect > 0 && corect < N * N)
             {
-                if (key == 8 || key == 83)
+                // Get 1 - > 233
+                if (!(key <= 0 || key >= 224))
                 {
-                    if (grid[pointerX][pointerY].getValue() != solutionGrid[pointerX][pointerY])
+
+                    if (key == 8 || key == 83)
                     {
-                        backSpaceKey();
+                        if (grid[pointerX][pointerY].getValue() != solutionGrid[pointerX][pointerY])
+                        {
+                            backSpaceKey();
+                            mainGame(0);
+                        }
+                    }
+                    else if (key == 75 || key == 68)
+                    {
+                        leftKey();
                         mainGame(0);
                     }
-                }
-                else if (key == 75 || key == 68)
-                {
-                    leftKey();
-                    mainGame(0);
-                }
-                else if (key == 72 || key == 65)
-                {
-                    upKey();
-                    mainGame(0);
-                }
-                else if (key == 80 || key == 66)
-                {
-                    downKey();
-                    mainGame(0);
-                }
-                else if (key == 77 || key == 67)
-                {
-                    rightKey();
-                    mainGame(0);
-                }
-                else if (grid[pointerX][pointerY].getValue() != solutionGrid[pointerX][pointerY] && key - 48 > 0 && key - 48 < 10)
-                {
-                    mainGame(key - 48);
+                    else if (key == 72 || key == 65)
+                    {
+                        upKey();
+                        mainGame(0);
+                    }
+                    else if (key == 80 || key == 66)
+                    {
+                        downKey();
+                        mainGame(0);
+                    }
+                    else if (key == 77 || key == 67)
+                    {
+                        rightKey();
+                        mainGame(0);
+                    }
+                    else if (grid[pointerX][pointerY].getValue() != solutionGrid[pointerX][pointerY] && key - 48 > 0 && key - 48 < 10)
+                    {
+                        getCorect();
+                        mainGame(key - 48);
+                    }
                 }
             }
         }
@@ -481,6 +521,7 @@ void Sudoku::printSudoku(int num, bool isResult)
     int colorFalse = 31;
     int colorTrue = 32;
     int colorFocus = 34;
+    finalProgress = round(((double(corect) / 81.0) * 100.0));
 
     cout << endl;
     cout << endl;
@@ -519,7 +560,6 @@ void Sudoku::printSudoku(int num, bool isResult)
                     {
                         highLights[i][j] = colorFocus;
                     }
-                    // Mat mau xac dinh dung hay sai
                 }
                 else if (highLights[i][j] != 32 && highLights[i][j] != 31)
                 {
@@ -558,15 +598,54 @@ void Sudoku::printSudoku(int num, bool isResult)
         }
     }
     cout << endl;
-    // for (int i = 0; i < N; i++)
-    // {
-    //     for (int j = 0; j < N; j++)
-    //     {
-    //         cout << solutionGrid[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
+    cout << endl;
+    cout << setw(2) << "" << printColor("Mistakes: ", 36) << (5 - incorect) << "/5" << endl;
+    cout << setw(2) << "" << printColor("Progress: ", 33) << finalProgress << "%" << endl;
+    showProgressHardMode(finalProgress);
+    cout << endl
+         << endl;
+    if (incorect > 0)
+    {
+        cout << setw(2) << "" << printColor("Press [ESC] or [P] to pause the game", 31) << endl;
+    }
+    else if (incorect <= 0 || corect == N * N)
+    {
+        cout << setw(2) << "" << printColor("Press [ESC] or [P] to go menu", 31) << endl;
+    }
 }
+
+void Sudoku::showProgressHardMode(double finalProgress)
+{
+    if (finalProgress >= 69)
+    {
+        if (finalProgress >= 84)
+        {
+            if (finalProgress >= 94)
+            {
+                cout << setw(2) << ""
+                     << "Just a little bit!";
+            }
+            else
+            {
+                cout << setw(2) << ""
+                     << "Almost there!";
+            }
+        }
+        else
+        {
+            cout << setw(2) << ""
+                 << "Half-way there!";
+        }
+    }
+
+    else
+    {
+        cout << setw(2) << ""
+             << "Unfinshed";
+    }
+}
+
+// KEYBOARD
 
 void Sudoku::upKey()
 {
@@ -617,7 +696,15 @@ void Sudoku::pauseKey()
     clearSystem();
     cout << printColor("=========================================", 37) << endl;
     cout << setw(10) << right << "" << printColor("PAUSE GAME", 33) << endl;
-    cout << printColor("[1] RESUME", 32) << endl;
+    if (incorect > 0)
+    {
+        cout << printColor("[1] RESUME", 32) << endl;
+    }
+    else if (incorect <= 0 || corect == N * N)
+    {
+        cout << printColor("[1] NEW GAME", 32) << endl;
+    }
+
     cout << printColor("[2] EXIT TO MENU", 33) << endl;
     cout << printColor("=========================================", 37) << endl;
 
@@ -633,7 +720,24 @@ void Sudoku::pauseKey()
             }
             else
             {
-                mainGame(0);
+                if (incorect > 0)
+                {
+                    if (select == '1' || select == 'p' || (int)select == 27)
+                    {
+                        mainGame(0);
+                    }
+                }
+                else
+                {
+                    if (select == '1')
+                    {
+                        playSudoku();
+                    }
+                    else if (select == 'p' || (int)select == 27)
+                    {
+                        mainGame(0);
+                    }
+                }
             }
         }
     }

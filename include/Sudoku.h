@@ -5,9 +5,13 @@
 class Sudoku
 {
 private:
-    int N;                  // 9x9
-    int K;                  // Number hiden
-    Square **grid;          // grid square
+    int N;         // 9x9
+    int K;         // Number hiden
+    Square **grid; // grid square
+
+    double finalProgress = 0;
+    int incorect = 5;
+    int corect = 0;
     int level = 1;          // Default level Game
     int pointerX = 0;       // Default pointer X = 0;
     int pointerY = 0;       // Default pointer Y = 0;
@@ -38,8 +42,10 @@ public:
     void fillBox(int row, int col);       // Fill Box
     bool fillRemaining(int row, int col); // Fill remaining blocks
     void removeKDigits();                 // Remove Randomly K digits to make game
+    bool getCorect();
     void mainGame(int value);
     void printSudoku(int num, bool isResult);
+    void showProgressHardMode(double finalProgress);
 
     // Keyboard
     void upKey();
