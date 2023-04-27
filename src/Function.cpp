@@ -39,9 +39,9 @@ long long Rand(long long l, long long h)
 // Random range [1 , num]
 int RandomNumber(int num)
 {
-    long long maxRand = 10000000000000;
+    // long long maxRand = 10000000000000;
     // cout<< (int)floor((double)Rand(0,maxRand) / (double)maxRand * num + 1) <<" ";
 
-    // return (int)floor((float)(rand() / double(RAND_MAX) * num + 1));
-    return (int)floor((double)Rand(0, maxRand) / (double)maxRand * num + 1);
+    return (int)floor((float)(rand() / double(RAND_MAX) * num + 1));
+    // return (int)floor((double)Rand(0, maxRand) / (double)maxRand * num + 1);
 }
