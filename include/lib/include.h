@@ -14,7 +14,7 @@
 #include <ostream>
 #include <fstream>
 #include <iomanip>
-
+#include "Function.h"
 // using std
 using namespace std;
 
@@ -29,13 +29,7 @@ using namespace std;
 #define PLATFORM_NAME "windows"               // Windows (Cygwin POSIX under Microsoft Window)
 #elif defined(__APPLE__) && defined(__MACH__) // Apple OSX and iOS (Darwin)
 #include "__getch.h"
-#if TARGET_IPHONE_SIMULATOR == 1
 #define PLATFORM_NAME "ios" // Apple iOS
-#elif TARGET_OS_IPHONE == 1
-#define PLATFORM_NAME "ios" // Apple iOS
-#elif TARGET_OS_MAC == 1
-#define PLATFORM_NAME "osx" // Apple OSX
-#endif
 #elif defined(__linux__)
 #include "__getch.h"
 #define PLATFORM_NAME "linux" // Debian, Ubuntu, Gentoo, Fedora, openSUSE, RedHat, Centos and other
