@@ -49,4 +49,5 @@ public:
     void rightKey();
     void escKey();
     void pauseKey();
+    void backSpaceKey();
 };
