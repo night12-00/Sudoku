@@ -462,51 +462,132 @@ void Sudoku::mainGame(int value)
 
     while (true)
     {
-        int key = getch();
-        if (key == 112 || key == 27)
+        int firstKey = getch();
+        if (PLATFORM_NAME == "windows")
         {
-            pauseKey();
+
+            int key = firstKey;
+
+            if (key == 112 || key == 27)
+            {
+                pauseKey();
+            }
+            else
+            {
+                if (incorect > 0 && corect < N * N)
+                {
+                    // Get 1 - > 233
+                    if (!(key <= 0 || key >= 224))
+                    {
+
+                        if (key == 8 || key == 83)
+                        {
+                            if (grid[pointerX][pointerY].getValue() !=
+                                solutionGrid[pointerX][pointerY])
+                            {
+                                backSpaceKey();
+                                mainGame(0);
+                            }
+                        }
+                        else if (key == 75 || key == 68 || key == 97)
+                        {
+                            leftKey();
+                            mainGame(0);
+                        }
+                        else if (key == 72 || key == 65 || key == 119)
+                        {
+                            upKey();
+                            mainGame(0);
+                        }
+                        else if (key == 80 || key == 66 || key == 115)
+                        {
+                            downKey();
+                            mainGame(0);
+                        }
+                        else if (key == 77 || key == 67 || key == 100)
+                        {
+                            rightKey();
+                            mainGame(0);
+                        }
+                        else if (grid[pointerX][pointerY].getValue() !=
+                                     solutionGrid[pointerX][pointerY] &&
+                                 key - 48 > 0 && key - 48 < 10)
+                        {
+                            getCorect();
+                            mainGame(key - 48);
+                        }
+                    }
+                }
+            }
         }
         else
         {
-            if (incorect > 0 && corect < N * N)
+            int key = firstKey;
+            int second;
+            if (firstKey == 27)
             {
-                // Get 1 - > 233
-                if (!(key <= 0 || key >= 224))
+                second = getch();
+                if (second == 91)
                 {
-
-                    if (key == 8 || key == 83)
+                    key = getch();
+                }
+                else
+                {
+                    key = firstKey;
+                    if (key == 27)
                     {
-                        if (grid[pointerX][pointerY].getValue() != solutionGrid[pointerX][pointerY])
+                        pauseKey();
+                    }
+                }
+            }
+            if (key == 112)
+            {
+                pauseKey();
+            }
+            else
+            {
+                if (incorect > 0 && corect < N * N)
+                {
+                    // Get 1 - > 233
+                    if (!(key <= 0 || key >= 224))
+                    {
+
+                        if (key == 8 || key == 83)
                         {
-                            backSpaceKey();
+                            if (grid[pointerX][pointerY].getValue() !=
+                                solutionGrid[pointerX][pointerY])
+                            {
+                                backSpaceKey();
+                                mainGame(0);
+                            }
+                        }
+                        else if (key == 75 || key == 68 || key == 97)
+                        {
+                            leftKey();
                             mainGame(0);
                         }
-                    }
-                    else if (key == 75 || key == 68)
-                    {
-                        leftKey();
-                        mainGame(0);
-                    }
-                    else if (key == 72 || key == 65)
-                    {
-                        upKey();
-                        mainGame(0);
-                    }
-                    else if (key == 80 || key == 66)
-                    {
-                        downKey();
-                        mainGame(0);
-                    }
-                    else if (key == 77 || key == 67)
-                    {
-                        rightKey();
-                        mainGame(0);
-                    }
-                    else if (grid[pointerX][pointerY].getValue() != solutionGrid[pointerX][pointerY] && key - 48 > 0 && key - 48 < 10)
-                    {
-                        getCorect();
-                        mainGame(key - 48);
+                        else if (key == 72 || key == 65 || key == 119)
+                        {
+                            upKey();
+                            mainGame(0);
+                        }
+                        else if (key == 80 || key == 66 || key == 115)
+                        {
+                            downKey();
+                            mainGame(0);
+                        }
+                        else if (key == 77 || key == 67 || key == 100)
+                        {
+                            rightKey();
+                            mainGame(0);
+                        }
+                        else if (grid[pointerX][pointerY].getValue() !=
+                                     solutionGrid[pointerX][pointerY] &&
+                                 key - 48 > 0 && key - 48 < 10)
+                        {
+                            getCorect();
+                            mainGame(key - 48);
+                        }
                     }
                 }
             }
