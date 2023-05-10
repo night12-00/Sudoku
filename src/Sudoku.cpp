@@ -214,8 +214,11 @@ void Sudoku::createGrid()
         // that there are no edges initially
     }
 
+    // Create 3 box on grid
     fillDiagonal();
-    fillRemaining(0, sqrtN);
+
+    // Fill remaining grid with solveSudoku;
+    solveSudoku(0, 0);
 
     for (int i = 0; i < N; i++)
     {
@@ -224,9 +227,10 @@ void Sudoku::createGrid()
             solutionGrid[i][j] = grid[i][j].getValue();
         }
     }
-
+    // Remove K number
     removeKDigits();
 
+    // Copy grid to solutionGrid and init color on highlights
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++)
@@ -324,10 +328,10 @@ void Sudoku::fillBox(int row, int col)
 }
 
 // Fill remaining blocks
-bool Sudoku::fillRemaining(int row, int col)
+bool Sudoku::solveSudoku(int row, int col)
 {
     int SRN = (int)sqrt(N);
-    // System.out.println(row+" "+col);
+
     if (col >= N && row < N - 1)
     {
         row = row + 1;
@@ -368,7 +372,7 @@ bool Sudoku::fillRemaining(int row, int col)
         if (CheckIfSafe(row, col, num))
         {
             grid[row][col].setvalue(num);
-            if (fillRemaining(row, col + 1))
+            if (solveSudoku(row, col + 1))
             {
                 return true;
             }

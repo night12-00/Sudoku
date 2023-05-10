@@ -13,6 +13,5 @@ public:
     Square();
     ~Square();
     int getValue();
-    string getValue(int color);
     void setvalue(int value);
 };

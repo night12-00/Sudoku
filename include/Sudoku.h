@@ -35,13 +35,14 @@ public:
     bool unUsedInBox(int rowStart, int colStart, int num);
     bool unUsedInRow(int row, int num);
     bool unUsedInCol(int col, int num);
+
     // Check if safe to put in cell
     bool CheckIfSafe(int row, int col, int num);
     // Fill
-    void fillDiagonal();                  // Fill the diagonal of SRN x SRN matrices
-    void fillBox(int row, int col);       // Fill Box
-    bool fillRemaining(int row, int col); // Fill remaining blocks
-    void removeKDigits();                 // Remove Randomly K digits to make game
+    void fillDiagonal();                // Fill the diagonal of SRN x SRN matrices
+    void fillBox(int row, int col);     // Fill Box
+    bool solveSudoku(int row, int col); // Fill remaining blocks
+    void removeKDigits();               // Remove Randomly K digits to make game
     bool getCorect();
     void mainGame(int value);
     void printSudoku(int num, bool isResult);
