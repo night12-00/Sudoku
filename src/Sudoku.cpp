@@ -53,7 +53,7 @@ void Sudoku::playSudoku()
 {
     // GAME LEVEL
     char setLevel = gameLevel();
-    incorect = 5;
+    incorrect = 5;
     // CONDITION LEVEL
     if (setLevel == '4')
     {
@@ -407,9 +407,9 @@ void Sudoku::removeKDigits()
     }
 }
 
-bool Sudoku::getCorect()
+bool Sudoku::getCorrect()
 {
-    corect = 0;
+    correct = 0;
     // Kiểm tra tất cả các ô có giá trị khác 0 (tức là đã được điền đầy đủ)
     for (int row = 0; row < 9; row++)
     {
@@ -417,7 +417,7 @@ bool Sudoku::getCorect()
         {
             if (grid[row][col].getValue() == solutionGrid[row][col])
             {
-                ++corect;
+                ++correct;
             }
         }
     }
@@ -445,20 +445,20 @@ void Sudoku::mainGame(int value)
     }
     if (value != 0 && value != solutionGrid[pointerX][pointerY])
     {
-        --incorect;
-        if (incorect > 0)
+        --incorrect;
+        if (incorrect > 0)
         {
-            cout << setw(4) << "" << printColor("CAREFULL!!! You have " + to_string(incorect) + " mistakes left", 31);
+            cout << setw(4) << "" << printColor("CAREFULL!!! You have " + to_string(incorrect) + " mistakes left", 31);
         }
         highLights[pointerX][pointerY] = 31;
     }
 
-    getCorect();
-    if (incorect <= 0)
+    getCorrect();
+    if (incorrect <= 0)
     {
         cout << setw(15) << "" << printColor("YOU LOSE !!!", 31);
     }
-    if (corect == N * N)
+    if (correct == N * N)
     {
         cout << setw(15) << "" << printColor("YOU WIN !!!", 32);
     }
@@ -478,7 +478,7 @@ void Sudoku::mainGame(int value)
             }
             else
             {
-                if (incorect > 0 && corect < N * N)
+                if (incorrect > 0 && correct < N * N)
                 {
                     // Get 1 - > 233
                     if (!(key <= 0 || key >= 224))
@@ -517,7 +517,7 @@ void Sudoku::mainGame(int value)
                                      solutionGrid[pointerX][pointerY] &&
                                  key - 48 > 0 && key - 48 < 10)
                         {
-                            getCorect();
+                            getCorrect();
                             mainGame(key - 48);
                         }
                     }
@@ -550,7 +550,7 @@ void Sudoku::mainGame(int value)
             }
             else
             {
-                if (incorect > 0 && corect < N * N)
+                if (incorrect > 0 && correct < N * N)
                 {
                     // Get 1 - > 233
                     if (!(key <= 0 || key >= 224))
@@ -589,7 +589,7 @@ void Sudoku::mainGame(int value)
                                      solutionGrid[pointerX][pointerY] &&
                                  key - 48 > 0 && key - 48 < 10)
                         {
-                            getCorect();
+                            getCorrect();
                             mainGame(key - 48);
                         }
                     }
@@ -606,7 +606,7 @@ void Sudoku::printSudoku(int num, bool isResult)
     int colorFalse = 31;
     int colorTrue = 32;
     int colorFocus = 34;
-    finalProgress = round(((double(corect) / 81.0) * 100.0));
+    finalProgress = round(((double(correct) / 81.0) * 100.0));
 
     cout << endl;
     cout << endl;
@@ -684,16 +684,16 @@ void Sudoku::printSudoku(int num, bool isResult)
     }
     cout << endl;
     cout << endl;
-    cout << setw(2) << "" << printColor("Mistakes: ", 36) << (5 - incorect) << "/5" << endl;
+    cout << setw(2) << "" << printColor("Mistakes: ", 36) << (5 - incorrect) << "/5" << endl;
     cout << setw(2) << "" << printColor("Progress: ", 33) << finalProgress << "%" << endl;
     showProgressHardMode(finalProgress);
     cout << endl
          << endl;
-    if (incorect > 0)
+    if (incorrect > 0)
     {
         cout << setw(2) << "" << printColor("Press [ESC] or [P] to pause the game", 31) << endl;
     }
-    else if (incorect <= 0 || corect == N * N)
+    else if (incorrect <= 0 || correct == N * N)
     {
         cout << setw(2) << "" << printColor("Press [ESC] or [P] to go menu", 31) << endl;
     }
@@ -781,11 +781,11 @@ void Sudoku::pauseKey()
     clearSystem();
     cout << printColor("=========================================", 37) << endl;
     cout << setw(10) << right << "" << printColor("PAUSE GAME", 33) << endl;
-    if (incorect > 0)
+    if (incorrect > 0)
     {
         cout << printColor("[1] RESUME", 32) << endl;
     }
-    else if (incorect <= 0 || corect == N * N)
+    else if (incorrect <= 0 || correct == N * N)
     {
         cout << printColor("[1] NEW GAME", 32) << endl;
     }
@@ -805,7 +805,7 @@ void Sudoku::pauseKey()
             }
             else
             {
-                if (incorect > 0)
+                if (incorrect > 0)
                 {
                     if (select == '1' || select == 'p' || (int)select == 27)
                     {
