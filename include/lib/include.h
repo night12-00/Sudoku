@@ -8,6 +8,8 @@
 #include <cstdlib>
 #include <string>
 #include <vector>
+#include <queue>
+#include <stack>
 #include <cmath>
 #include <algorithm>
 #include <istream>

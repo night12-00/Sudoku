@@ -1,7 +1,13 @@
 #pragma once
 #include "include.h"
 #include "Square.h"
+#include "TimePlay.h"
+#include "ListPlayer.h"
+#include "Player.h"
 
+class TimePlay;
+class ListPlayer;
+class Player;
 class Sudoku
 {
 private:
@@ -18,15 +24,25 @@ private:
     Square **solutionGrid; // grid Solution
     Square **highLights;   // arr for highligh
 
+    bool printTime = true;
+    // Time
+    TimePlay *timePlay;
+
+    ListPlayer *list;
+    Player *listRanking;
+
 protected:
 public:
     Sudoku();
-    Sudoku(int N);
+    Sudoku(int N, ListPlayer *listPlayer);
     ~Sudoku();
     void menu();
     void gotoMenu(char choice);
+    void saveAchievement();
+    void printAchievement(string name, bool saved);
     void playSudoku();
     void helpSudoku(string located);
+    void rankingSudoku();
     void exitMenu();
     char gameLevel();
     void createGrid();
