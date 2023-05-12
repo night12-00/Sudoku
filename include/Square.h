@@ -13,5 +13,11 @@ public:
     Square();
     ~Square();
     int getValue();
-    void setvalue(int value);
+
+    Square &operator=(int value);
+    Square &operator=(Square &square);
+    bool operator==(const Square &square);
+    bool operator==(int value);
+    bool operator!=(const Square &square);
+    bool operator!=(int value);
 };

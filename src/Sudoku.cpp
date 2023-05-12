@@ -7,6 +7,16 @@ Sudoku::Sudoku(int N)
 }
 Sudoku::~Sudoku()
 {
+    for (int i = 0; i < N; i++)
+    {
+        delete[] grid[i];
+        delete[] solutionGrid[i];
+        delete[] highLights[i];
+    }
+
+    delete[] grid;
+    delete[] solutionGrid;
+    delete[] highLights;
 }
 
 void Sudoku::menu()
@@ -203,12 +213,16 @@ void Sudoku::createGrid()
 {
     int sqrtN = sqrt(N);
     grid = new Square *[N];
+    solutionGrid = new Square *[N];
+    highLights = new Square *[N];
     // Create a row for every pointer
     for (int i = 0; i < N; i++)
     {
 
         // Note : Rows may not be contiguous
         grid[i] = new Square[N];
+        solutionGrid[i] = new Square[N];
+        highLights[i] = new Square[N];
 
         // Initialize all entries as false to indicate
         // that there are no edges initially
@@ -224,7 +238,7 @@ void Sudoku::createGrid()
     {
         for (int j = 0; j < N; j++)
         {
-            solutionGrid[i][j] = grid[i][j].getValue();
+            solutionGrid[i][j] = grid[i][j];
         }
     }
     // Remove K number
@@ -235,7 +249,7 @@ void Sudoku::createGrid()
     {
         for (int j = 0; j < N; j++)
         {
-            if (grid[i][j].getValue() != 0)
+            if (grid[i][j] != 0)
             {
                 // default white color
                 highLights[i][j] = 37;
@@ -256,8 +270,7 @@ bool Sudoku::unUsedInBox(int rowStart, int colStart, int num)
     {
         for (int j = 0; j < sqrtN; j++)
         {
-            int value = grid[rowStart + i][colStart + j].getValue();
-            if (value == num)
+            if (grid[rowStart + i][colStart + j] == num)
             {
                 return false;
             }
@@ -269,9 +282,8 @@ bool Sudoku::unUsedInRow(int row, int num)
 {
     for (int j = 0; j < N; j++)
     {
-        int value = grid[row][j].getValue();
 
-        if (value == num)
+        if (grid[row][j] == num)
         {
             return false;
         }
@@ -283,8 +295,7 @@ bool Sudoku::unUsedInCol(int col, int num)
 {
     for (int i = 0; i < N; i++)
     {
-        int value = grid[i][col].getValue();
-        if (value == num)
+        if (grid[i][col] == num)
         {
             return false;
         }
@@ -322,7 +333,7 @@ void Sudoku::fillBox(int row, int col)
             {
                 num = RandomNumber(N);
             } while (!unUsedInBox(row, col, num));
-            grid[row + i][col + j].setvalue(num);
+            grid[row + i][col + j] = num;
         }
     }
 }
@@ -371,12 +382,12 @@ bool Sudoku::solveSudoku(int row, int col)
     {
         if (CheckIfSafe(row, col, num))
         {
-            grid[row][col].setvalue(num);
+            grid[row][col] = num;
             if (solveSudoku(row, col + 1))
             {
                 return true;
             }
-            grid[row][col].setvalue(0);
+            grid[row][col] = 0;
         }
     }
     return false;
@@ -398,11 +409,10 @@ void Sudoku::removeKDigits()
             j = j - 1;
         }
         // System.out.println(i+" "+j);
-        int value = grid[i][j].getValue();
-        if (value != 0)
+        if (grid[i][j] != 0)
         {
             count--;
-            grid[i][j].setvalue(0);
+            grid[i][j] = 0;
         }
     }
 }
@@ -415,7 +425,7 @@ bool Sudoku::getCorrect()
     {
         for (int col = 0; col < 9; col++)
         {
-            if (grid[row][col].getValue() == solutionGrid[row][col])
+            if (grid[row][col] == solutionGrid[row][col])
             {
                 ++correct;
             }
@@ -436,14 +446,14 @@ void Sudoku::mainGame(int value)
 
     if (value > 0 && value < 10)
     {
-        grid[pointerX][pointerY].setvalue(value);
+        grid[pointerX][pointerY] = value;
     }
 
-    if (value != 0 && value == solutionGrid[pointerX][pointerY])
+    if (value != 0 && solutionGrid[pointerX][pointerY] == value)
     {
         highLights[pointerX][pointerY] = 32;
     }
-    if (value != 0 && value != solutionGrid[pointerX][pointerY])
+    if (value != 0 && solutionGrid[pointerX][pointerY] != value)
     {
         --incorrect;
         if (incorrect > 0)
@@ -462,7 +472,7 @@ void Sudoku::mainGame(int value)
     {
         cout << setw(15) << "" << printColor("YOU WIN !!!", 32);
     }
-    printSudoku(value, value == solutionGrid[pointerX][pointerY]);
+    printSudoku(value, solutionGrid[pointerX][pointerY] == value);
 
     while (true)
     {
@@ -486,7 +496,7 @@ void Sudoku::mainGame(int value)
 
                         if (key == 8 || key == 83)
                         {
-                            if (grid[pointerX][pointerY].getValue() !=
+                            if (grid[pointerX][pointerY] !=
                                 solutionGrid[pointerX][pointerY])
                             {
                                 backSpaceKey();
@@ -513,7 +523,7 @@ void Sudoku::mainGame(int value)
                             rightKey();
                             mainGame(0);
                         }
-                        else if (grid[pointerX][pointerY].getValue() !=
+                        else if (grid[pointerX][pointerY] !=
                                      solutionGrid[pointerX][pointerY] &&
                                  key - 48 > 0 && key - 48 < 10)
                         {
@@ -558,7 +568,7 @@ void Sudoku::mainGame(int value)
 
                         if (key == 8 || key == 83)
                         {
-                            if (grid[pointerX][pointerY].getValue() !=
+                            if (grid[pointerX][pointerY] !=
                                 solutionGrid[pointerX][pointerY])
                             {
                                 backSpaceKey();
@@ -585,7 +595,7 @@ void Sudoku::mainGame(int value)
                             rightKey();
                             mainGame(0);
                         }
-                        else if (grid[pointerX][pointerY].getValue() !=
+                        else if (grid[pointerX][pointerY] !=
                                      solutionGrid[pointerX][pointerY] &&
                                  key - 48 > 0 && key - 48 < 10)
                         {
@@ -621,10 +631,10 @@ void Sudoku::printSudoku(int num, bool isResult)
 
             string value = to_string(grid[i][j].getValue());
 
-            if (grid[i][j].getValue() == 0)
+            if (grid[i][j] == 0)
             {
                 value = " ";
-                if (pointerX == i && pointerY == j && grid[pointerX][pointerY].getValue() == 0)
+                if (pointerX == i && pointerY == j && grid[pointerX][pointerY] == 0)
                 {
                     value = "x";
                     highLights[i][j] = colorFocus;
@@ -638,7 +648,7 @@ void Sudoku::printSudoku(int num, bool isResult)
             }
             else
             {
-                if (pointerX == i && pointerY == j && grid[pointerX][pointerY].getValue() != 0)
+                if (pointerX == i && pointerY == j && grid[pointerX][pointerY] != 0)
                 {
                     value = to_string(grid[pointerX][pointerY].getValue());
                     if (highLights[i][j] != 32 && highLights[i][j] != 31)
@@ -655,21 +665,21 @@ void Sudoku::printSudoku(int num, bool isResult)
             if (j == 0)
             {
 
-                cout << printColor("|| ", colorBorder) << printColor(value, highLights[i][j]) << printColor(" |", colorBorder);
+                cout << printColor("|| ", colorBorder) << printColor(value, highLights[i][j].getValue()) << printColor(" |", colorBorder);
                 continue;
             }
             else if (j == 8)
             {
                 cout
-                    << " " << printColor(value, highLights[i][j]) << printColor(" ||", colorBorder);
+                    << " " << printColor(value, highLights[i][j].getValue()) << printColor(" ||", colorBorder);
             }
             else if (j == 2 || j == 5)
             {
-                cout << " " << printColor(value, highLights[i][j]) << printColor(" ||", colorBorder);
+                cout << " " << printColor(value, highLights[i][j].getValue()) << printColor(" ||", colorBorder);
             }
             else
             {
-                cout << " " << printColor(value, highLights[i][j]) << printColor(" |", colorBorder);
+                cout << " " << printColor(value, highLights[i][j].getValue()) << printColor(" |", colorBorder);
             }
         }
         if (h % 3 == 0)
@@ -830,5 +840,5 @@ void Sudoku::pauseKey()
 
 void Sudoku::backSpaceKey()
 {
-    grid[pointerX][pointerY].setvalue(0);
+    grid[pointerX][pointerY] = 0;
 }
