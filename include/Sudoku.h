@@ -10,13 +10,13 @@ private:
     Square **grid; // grid square
 
     double finalProgress = 0;
-    int incorect = 5;
-    int corect = 0;
-    int level = 1;          // Default level Game
-    int pointerX = 0;       // Default pointer X = 0;
-    int pointerY = 0;       // Default pointer Y = 0;
-    int solutionGrid[9][9]; // grid Solution
-    int highLights[9][9];   // arr for highligh
+    int incorrect = 5;
+    int correct = 0;
+    int level = 1;         // Default level Game
+    int pointerX = 0;      // Default pointer X = 0;
+    int pointerY = 0;      // Default pointer Y = 0;
+    Square **solutionGrid; // grid Solution
+    Square **highLights;   // arr for highligh
 
 protected:
 public:
@@ -43,7 +43,7 @@ public:
     void fillBox(int row, int col);     // Fill Box
     bool solveSudoku(int row, int col); // Fill remaining blocks
     void removeKDigits();               // Remove Randomly K digits to make game
-    bool getCorect();
+    bool getCorrect();
     void mainGame(int value);
     void printSudoku(int num, bool isResult);
     void showProgressHardMode(double finalProgress);
