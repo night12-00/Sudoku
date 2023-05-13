@@ -580,7 +580,7 @@ void Sudoku::removeKDigits()
     }
 }
 
-bool Sudoku::getCorrect()
+void Sudoku::getCorrect()
 {
     correct = 0;
     // Kiểm tra tất cả các ô có giá trị khác 0 (tức là đã được điền đầy đủ)
@@ -594,8 +594,6 @@ bool Sudoku::getCorrect()
             }
         }
     }
-
-    return true;
 }
 
 void Sudoku::mainGame(int value)

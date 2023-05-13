@@ -58,7 +58,7 @@ public:
     void fillBox(int row, int col);     // Fill Box
     bool solveSudoku(int row, int col); // Fill remaining blocks
     void removeKDigits();               // Remove Randomly K digits to make game
-    bool getCorrect();
+    void getCorrect();
     void mainGame(int value);
     void printSudoku(int num, bool isResult);
     void showProgressHardMode(double finalProgress);
