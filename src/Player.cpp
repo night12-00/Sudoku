@@ -3,11 +3,7 @@
 Player::Player()
 {
 }
-Player::Player(string name, double timePlay, int level)
-{
-    this->name = name;
-    this->score = (int)(1 / timePlay) * 5000000 * level;
-}
+
 Player::Player(string name, int score)
 {
     this->name = name;

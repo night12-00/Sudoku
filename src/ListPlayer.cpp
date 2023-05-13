@@ -36,12 +36,14 @@ void ListPlayer::getRankingToFile()
 ListPlayer::ListPlayer()
 {
     getRankingToFile();
+    ShellSortPlayer();
 }
 
 ListPlayer::ListPlayer(Player *players, int length)
 {
     this->players = players;
     this->length = length;
+    ShellSortPlayer();
 }
 
 ListPlayer::~ListPlayer()
