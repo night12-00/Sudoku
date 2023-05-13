@@ -27,14 +27,13 @@ private:
     bool printTime = true;
     // Time
     TimePlay *timePlay;
-
     ListPlayer *list;
     Player *listRanking;
 
 protected:
 public:
     Sudoku();
-    Sudoku(int N, ListPlayer *listPlayer);
+    Sudoku(int N);
     ~Sudoku();
     void menu();
     void gotoMenu(char choice);

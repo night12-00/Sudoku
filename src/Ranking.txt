@@ -1,12 +1,3 @@
-11
-tan  18867
-hung 13920
-phong 9450
-tuan 8321
-nghia 7348
-cuong 6921
-chau 5234
-dat 4317
-hai 3628
-duc 2139
-long 1357
+2
+tanhoang 333333
+ 0

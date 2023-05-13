@@ -7,9 +7,37 @@ void ListPlayer::printPlayers()
         cout << players[i].name << " " << players[i].score << endl;
     }
 }
+void ListPlayer::getRankingToFile()
+{
+    int length = 1;
+    string name;
+    int score = 0;
+    fstream file;
+    Player *players;
+
+    file.open("src/Ranking.txt", ios::in);
+
+    file >> length;
+    cout << length;
+    players = new Player[length];
+    for (int i = 0; i < length; i++)
+    {
+
+        file >> name;
+        file >> score;
+        Player player(name, score);
+        players[i] = player;
+    }
+    this->players = players;
+    this->length = length;
+    file.close();
+}
+
 ListPlayer::ListPlayer()
 {
+    getRankingToFile();
 }
+
 ListPlayer::ListPlayer(Player *players, int length)
 {
     this->players = players;
@@ -56,8 +84,10 @@ void ListPlayer::AddPlayer(Player player)
 Player *ListPlayer::Ranking()
 {
     Player *vt = new Player[10];
+    int size;
+    length < 10 ? size = this->length : size = 10;
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < size; i++)
     {
         vt[i] = players[i];
     }
