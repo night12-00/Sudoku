@@ -6,7 +6,7 @@ Player::Player()
 Player::Player(string name, double timePlay)
 {
     this->name = name;
-    this->score = (int)(1 / timePlay) * 1000000;
+    this->score = (int)(1 / timePlay) * 5000000;
 }
 Player::Player(string name, int score)
 {

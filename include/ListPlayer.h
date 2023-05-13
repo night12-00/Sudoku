@@ -8,14 +8,15 @@ class Player;
 class ListPlayer
 {
 private:
+    friend class Sudoku;
     Player *players;
     int length;
-    friend class Sudoku;
 
 public:
     ListPlayer();
     ListPlayer(Player *players, int length);
     ~ListPlayer();
+    void getRankingToFile();
     void addRankingToFile();
     void printPlayers();
     Player *getList();

@@ -1,10 +1,13 @@
 #include "Sudoku.h"
 
-Sudoku::Sudoku(int N, ListPlayer *listPlayer)
+Sudoku::Sudoku(int N)
 {
     this->N = N;
+    ListPlayer *listPlayer = new ListPlayer();
     this->list = listPlayer;
-    listRanking = new Player[10];
+    int size;
+    list->getLength() < 10 ? size = listPlayer->getLength() : size = 9;
+    listRanking = new Player[size];
     listRanking = list->Ranking();
     menu();
 }
@@ -73,7 +76,7 @@ void Sudoku::saveAchievement()
     int time = floor(timePlay->timePlay);
     string minute = to_string(time / 60);
     string second = to_string(time - ((time / 60) * 60));
-    int score = 1000000 / time;
+    int score = 5000000 / time;
     bool saved = false;
 
     printAchievement(name, saved);
@@ -92,8 +95,17 @@ void Sudoku::saveAchievement()
             // Enter
             if ((int)key == 13)
             {
+                if (name == "")
+                {
+                    name = "Robot";
+                }
                 Player player(name, score);
                 list->AddPlayer(player);
+
+                // Update ranking
+                listRanking = list->Ranking();
+
+                // IsSaved non call again
                 saved = true;
                 printAchievement(name, saved);
             }
@@ -120,6 +132,7 @@ void Sudoku::saveAchievement()
             printAchievement(name, saved);
             if (key == 27)
             {
+
                 menu();
                 break;
             }
@@ -132,14 +145,14 @@ void Sudoku::printAchievement(string name, bool saved)
     int time = floor(timePlay->timePlay);
     string minute = to_string(time / 60);
     string second = to_string(time - ((time / 60) * 60));
-    int score = 1000000 / time;
+    int score = 5000000 / time;
     clearSystem();
     cout << printColor("=========================================", 37) << endl;
     cout << setw(16) << "" << printColor("SAVE ACHIEVEMENTS", 36) << endl;
     cout << printColor("=========================================", 37) << endl;
     cout << endl;
     cout << setw(2) << ""
-         << "Enter your name: " << name;
+         << "Enter your name: " << name << "_";
     cout << endl;
     cout << setw(2) << ""
          << "Your Time: " << minute << ":" << second;
@@ -157,7 +170,7 @@ void Sudoku::printAchievement(string name, bool saved)
     else
     {
         cout << setw(2) << "" << printColor("SAVED", 32) << endl;
-        cout << setw(2) << "" << printColor("Press [ESC] to go menu", 32) << endl;
+        cout << setw(2) << "" << printColor("Press [ESC] go to menu", 32) << endl;
     }
 }
 
@@ -254,22 +267,27 @@ void Sudoku::helpSudoku(string located)
 // Ranking SUDOKU
 void Sudoku::rankingSudoku()
 {
+
     clearSystem();
-    cout << printColor("=========================================", 37) << endl;
-    cout << setw(35) << right << printColor("Ranking", 36) << endl;
-    cout << printColor("=========================================", 37) << endl;
+    cout << printColor("==================================================", 37) << endl;
+    cout << setw(40) << right << printColor("Ranking", 36) << endl;
+    cout << printColor("==================================================", 37) << endl;
     cout << endl;
     cout << setw(2) << "" << printColor("TOP", 32);
-    cout << setw(30) << right << printColor("NAME", 32);
-    cout << setw(30) << right << printColor("SCORE", 32) << endl;
+    cout << setw(12) << "" << printColor("NAME", 32);
+    cout << setw(15) << "" << printColor("SCORE", 32) << endl;
     cout << printColor("==================================================", 37) << endl;
 
-    for (int i = 0; i < 9; i++)
+    int size;
+    string score;
+    list->getLength() < 10 ? size = list->getLength() : size = 9;
+    for (int i = 0; i < size; i++)
     {
+        score = listRanking[i].score > 0 ? to_string(listRanking[i].score) : "";
         cout << setw(2) << ""
              << "[" << i + 1 << "]" << setw(5) << ""
-             << "||" << setw(10) << listRanking[i].name << setw(5) << ""
-             << "||" << setw(10) << "" << listRanking[i].score << endl;
+             << "||" << setw(5) << "" << listRanking[i].name << setw(12 - listRanking[i].name.size()) << ""
+             << "||" << setw(5) << "" << score << endl;
     }
 
     // PAUSE
@@ -295,7 +313,7 @@ void Sudoku::exitMenu()
         if ((select == '1' || select == '2' || (int)select == 27))
         {
             cout << endl;
-            if (select == '1' || (int)select == 27)
+            if (select == '1')
             {
                 exit(0);
             }
@@ -574,6 +592,7 @@ void Sudoku::mainGame(int value)
 {
     clearSystem();
     cout << solutionGrid[pointerX][pointerY].getValue() << endl;
+    grid[pointerX][pointerY] = solutionGrid[pointerX][pointerY];
     cout << printColor("=========================================", 37) << endl;
     cout << setw(35) << right << printColor("SUDOKU", 36) << endl;
     cout << printColor("=========================================", 37) << endl;
