@@ -12,7 +12,7 @@ private:
 
 public:
     Player();
-    Player(string name, double timePlay);
+    Player(string name, double timePlay, int level);
     Player(string name, int score);
     ~Player();
     void setPlayer(string name, int score);
