@@ -1,6 +1,5 @@
 #pragma once
 #include "Player.h"
-#include "Sudoku.h"
 #include "include.h"
 
 class Player;
@@ -8,7 +7,6 @@ class Player;
 class ListPlayer
 {
 private:
-    friend class Sudoku;
     Player *players;
     int length;
 

@@ -157,7 +157,7 @@ void Sudoku::printAchievement(string name, bool saved)
     int score = 5000000 * level / time;
     clearSystem();
     cout << printColor("=========================================", 37) << endl;
-    cout << setw(16) << "" << printColor("SAVE ACHIEVEMENTS", 36) << endl;
+    cout << setw(12) << "" << printColor("SAVE ACHIEVEMENTS", 36) << endl;
     cout << printColor("=========================================", 37) << endl;
     cout << endl;
     cout << setw(2) << ""
@@ -297,6 +297,8 @@ void Sudoku::rankingSudoku()
              << "||" << setw(5) << "" << listRanking[i].name << setw(12 - listRanking[i].name.size()) << ""
              << "||" << setw(5) << "" << score << endl;
     }
+    cout << endl;
+    cout << printColor("(Press any key to go back!) ", 35) << endl;
 
     // PAUSE
     getch();
@@ -601,8 +603,8 @@ void Sudoku::mainGame(int value)
     clearSystem();
 
     // Get anwser
-    // cout << solutionGrid[pointerX][pointerY].getValue() << endl;
-    // grid[pointerX][pointerY] = solutionGrid[pointerX][pointerY];
+    cout << solutionGrid[pointerX][pointerY].getValue() << endl;
+    grid[pointerX][pointerY] = solutionGrid[pointerX][pointerY];
 
     cout << printColor("=========================================", 37) << endl;
     cout << setw(35) << right << printColor("SUDOKU", 36) << endl;
@@ -1018,9 +1020,13 @@ void Sudoku::pauseKey()
 
         cout << printColor("[1] RESUME", 32) << endl;
     }
-    else if (incorrect <= 0 || correct == N * N)
+    else if (incorrect <= 0)
     {
         cout << printColor("[1] GO TO MENU", 32) << endl;
+    }
+    else if (correct == N * N)
+    {
+        cout << printColor("[1] SAVE SCORE", 32) << endl;
     }
 
     cout << printColor("[2] EXIT TO MENU", 33) << endl;
@@ -1045,7 +1051,11 @@ void Sudoku::pauseKey()
             {
                 if (incorrect > 0)
                 {
-                    if (select == '1' || select == 'p' || (int)select == 27)
+                    if (select == '1' && correct == N * N)
+                    {
+                        saveAchievement();
+                    }
+                    else if (select == '1' || select == 'p' || (int)select == 27)
                     {
                         if (correct != N * N)
                         {
