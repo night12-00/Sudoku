@@ -9,7 +9,7 @@ void ListPlayer::printPlayers()
 }
 void ListPlayer::getRankingToFile()
 {
-    int length = 1;
+    int length = 0;
     string name;
     int score = 0;
     fstream file;
