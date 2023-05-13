@@ -603,8 +603,12 @@ void Sudoku::mainGame(int value)
     clearSystem();
 
     // Get anwser
-    cout << solutionGrid[pointerX][pointerY].getValue() << endl;
-    grid[pointerX][pointerY] = solutionGrid[pointerX][pointerY];
+    // cout << solutionGrid[pointerX][pointerY].getValue() << endl;
+    // grid[pointerX][pointerY] = solutionGrid[pointerX][pointerY];
+    // if (grid[pointerX][pointerY].getValue() == 0)
+    // {
+    //      value = solutionGrid[pointerX][pointerY].getValue();
+    // }
 
     cout << printColor("=========================================", 37) << endl;
     cout << setw(35) << right << printColor("SUDOKU", 36) << endl;
