@@ -13,6 +13,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 if (WIN32)
 file(GLOB SOURCES 
   "src/*.cpp"
+  "src/lib/Function.cpp"
 )
 else()
 file(GLOB SOURCES 
