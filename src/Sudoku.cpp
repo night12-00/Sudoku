@@ -281,9 +281,11 @@ void Sudoku::rankingSudoku()
     cout << setw(40) << right << printColor("Ranking", 36) << endl;
     cout << printColor("==================================================", 37) << endl;
     cout << endl;
-    cout << setw(2) << "" << printColor("TOP", 32);
-    cout << setw(12) << "" << printColor("NAME", 32);
-    cout << setw(15) << "" << printColor("SCORE", 32) << endl;
+    cout << setw(2) << "" << printColor("TOP", 32) << setw(5) << ""
+         << "||";
+    cout << setw(5) << "" << printColor("NAME", 32) << setw(8) << ""
+         << "||";
+    cout << setw(5) << "" << printColor("SCORE", 32) << endl;
     cout << printColor("==================================================", 37) << endl;
 
     int size;
