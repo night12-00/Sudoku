@@ -1,10 +1,14 @@
 #include "include.h"
 #include "Sudoku.h"
+#include "ListPlayer.h"
+#include "Player.h"
 
 int main()
 {
-  // get time for random
+
   srand(time(0));
-  Sudoku *init = new Sudoku(9);
+
+  Sudoku *initSudoku = new Sudoku(9);
+
   return 0;
 }
